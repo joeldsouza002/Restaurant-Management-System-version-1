@@ -50,8 +50,8 @@
                 else
                 {
                 ?>
-                <i class="fas fa-laugh-wink"></i>
-                <div class="sidebar-brand-text mx-3">Admin</div>
+                <i class="fas fa-hotel"></i>
+                <div class="sidebar-brand-text mx-3">RAZA Family Bar & Restaurant</div>
                 <?php
                 }
                 ?>
@@ -109,6 +109,16 @@
                 <a class="nav-link" href="billing.php">
                     <i class="fas fa-file-invoice"></i>
                     <span>Billing</span></a>
+            </li>
+            <?php
+            }
+            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://open.spotify.com/" target="frame">
+                    <i class="far fa-music"></i>
+                    <span>Spotify</span></a>
             </li>
             <?php
             }

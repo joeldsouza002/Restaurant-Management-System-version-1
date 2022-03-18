@@ -101,6 +101,9 @@ $(document).ready(function(){
 		},
 		"columnDefs":[
 			{
+                //"targets":[6],
+                //"orderable":false,
+
                 <?php
                 if($object->is_master_user())
                 {
