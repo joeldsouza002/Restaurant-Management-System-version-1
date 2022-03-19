@@ -116,8 +116,38 @@
             {
             ?>
             <li class="nav-item">
+                <a class="nav-link" href="discount.php" target="frame">
+                    <i class="fas fa-percent"></i>
+                    <span>Discount</span></a>
+            </li>
+            <?php
+            }
+            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            {
+            ?>
+            <li class="nav-item">
                 <a class="nav-link" href="https://open.spotify.com/" target="frame">
-                    <i class="far fa-music"></i>
+                    <i class="fas fa-money"></i>
+                    <span>Other Expences</span></a>
+            </li>
+            <?php
+            }
+            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://open.spotify.com/" target="frame">
+                    <i class="fa-brands fa-paypal"></i>
+                    <span>Payroll</span></a>
+            </li>
+            <?php
+            }
+            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://open.spotify.com/" target="frame">
+                    <i class="fas fa-music"></i>
                     <span>Spotify</span></a>
             </li>
             <?php
