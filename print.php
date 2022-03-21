@@ -5,6 +5,7 @@
 require_once('class/pdf.php');
 
 include('rms.php');
+//include('billing_action.php');
 
 $object = new rms();
 
@@ -119,20 +120,26 @@ if(isset($_GET["order_id"]))
 
 		$total_tax_row = $object->row_count();
 
-		$rowspan = 2 + $total_tax_row;
+		$rowspan = 4 + $total_tax_row;
 
 		$tax_result = $object->statement_result();
 
-		$output .= '
+		$output .= '	
 						<tr>
-							<td rowspan="'.$rowspan.'" colspan="3">
-							<b>Cashier : </b>'.$order["order_cashier"].'
-							</td>
+							<td rowspan="'.$rowspan.'" colspan="3"><b>Cashier : </b>'.$order["order_cashier"].'</td>
+							<td align="right"><b>Total</b></td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td align="right"><b>Discount</b></td>
+							<td>10%</td>
+						</tr>
+						<tr>
 							<td align="right"><b>Gross Total</b></td>
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
 		';
-
+		
 		foreach($tax_result as $tax)
 		{
 			$output .= '

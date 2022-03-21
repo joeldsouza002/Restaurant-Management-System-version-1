@@ -112,7 +112,7 @@
             </li>
             <?php
             }
-            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            if($object->is_master_user() || $object->is_cashier_user())
             {
             ?>
             <li class="nav-item">

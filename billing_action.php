@@ -5,6 +5,13 @@
 include('rms.php');
 
 $object = new rms();
+$count = 1;
+$discount = 10;
+$gross_total = 0;
+$total_tax_amt = 0;
+$net_total = 0;
+$discount_amt = 0;
+$final_total = 0;
 
 if(isset($_POST["action"]))
 {
@@ -128,10 +135,7 @@ if(isset($_POST["action"]))
 				<th>Action</th>
 			</tr>
 		';
-		$count = 1;
-		$gross_total = 0;
-		$total_tax_amt = 0;
-		$net_total = 0;
+		
 		foreach($result as $row)
 		{
 			$html .= '
@@ -145,7 +149,10 @@ if(isset($_POST["action"]))
 			</tr>
 			';
 			$count++;
-			$gross_total += $row["product_amount"];
+			$gross_total = $gross_total + $row["product_amount"];
+			$discount_amt = ($gross_total/100) * $discount;
+			$final_total = $gross_total;
+			$gross_total = $gross_total - $discount_amt;
 		}
 
 		$html .= '
