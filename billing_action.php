@@ -10,8 +10,9 @@ $discount = 10;
 $gross_total = 0;
 $total_tax_amt = 0;
 $net_total = 0;
-$discount_amt = 0;
-$final_total = 0;
+$amt_after_discount=0;
+
+
 
 if(isset($_POST["action"]))
 {
@@ -150,17 +151,36 @@ if(isset($_POST["action"]))
 			';
 			$count++;
 			$gross_total = $gross_total + $row["product_amount"];
+
+			//  discount  logic
 			$discount_amt = ($gross_total/100) * $discount;
-			$final_total = $gross_total;
-			$gross_total = $gross_total - $discount_amt;
+			
+			$amt_after_discount = $gross_total -$discount_amt;
+			
 		}
 
+
+		//total  amount
 		$html .= '
 			<tr>
 				<td colspan="4" class="text-right"><b>Total</b></td>
 				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
 			</tr>
 		';
+		//discount  amount
+
+		$html .= '
+		<tr>
+			<td colspan="4" class="text-right"><b>Discount</b></td>
+			<td colspan="2">'.$object->cur . number_format((float)$discount_amt, 2, '.', '').'</td>
+		</tr>
+	';
+		$html .= '
+		<tr>
+			<td colspan="4" class="text-right"><b>final amount</b></td>
+			<td colspan="2">'.$object->cur . number_format((float)$amt_after_discount, 2, '.', '').'</td>
+		</tr>
+	';
 
 		$object->query = "
 		SELECT * FROM tax_table 
@@ -204,7 +224,7 @@ if(isset($_POST["action"]))
 			$object->execute($tax_data);
 		}
 
-		$net_total = $gross_total + $total_tax_amt;
+		$net_total = $amt_after_discount+ $total_tax_amt;
 
 		$order_data = array(
 			':order_gross_amount'	=>	$gross_total,

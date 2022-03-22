@@ -124,17 +124,11 @@ if(isset($_GET["order_id"]))
 
 		$tax_result = $object->statement_result();
 
-		$output .= '	
+		$output .= '
 						<tr>
-							<td rowspan="'.$rowspan.'" colspan="3"><b>Cashier : </b>'.$order["order_cashier"].'</td>
-							<td align="right"><b>Total</b></td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td align="right"><b>Discount</b></td>
-							<td>10%</td>
-						</tr>
-						<tr>
+							<td rowspan="'.$rowspan.'" colspan="3">
+							<b>Cashier : </b>'.$order["order_cashier"].'
+							</td>
 							<td align="right"><b>Gross Total</b></td>
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
