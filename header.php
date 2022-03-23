@@ -50,7 +50,7 @@
                 else
                 {
                 ?>
-                <i class="fas fa-hotel"></i>
+                <img src="D:\wamp64\www\Restaurant-Management-System-version-1\images\I.jpeg" type="jpeg"/>
                 <div class="sidebar-brand-text mx-3">RAZA Family Bar & Restaurant</div>
                 <?php
                 }
@@ -116,23 +116,13 @@
             {
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="discount.php" target="frame">
-                    <i class="fas fa-percent"></i>
-                    <span>Discount</span></a>
-            </li>
-            <?php
-            }
-            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
-            {
-            ?>
-            <li class="nav-item">
                 <a class="nav-link" href="https://open.spotify.com/" target="frame">
-                    <i class="fas fa-money"></i>
+                    <i class="fas fa-truck"></i>
                     <span>Other Expences</span></a>
             </li>
             <?php
             }
-            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            if($object->is_master_user())
             {
             ?>
             <li class="nav-item">
@@ -142,7 +132,7 @@
             </li>
             <?php
             }
-            if($object->is_waiter_user() || $object->is_master_user() || $object->is_cashier_user())
+            if($object->is_cashier_user())
             {
             ?>
             <li class="nav-item">

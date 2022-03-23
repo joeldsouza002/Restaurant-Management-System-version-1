@@ -33,9 +33,6 @@ include('header.php');
 
     <div class="card-body">
         <div class="table-responsive">
-            <div align=right>
-                <p>Give Discount: <input class="form-control form-control-sm" type="text" style="width:182px"></p>
-            </div>
             <table class="table table-bordered" id="billing_table" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -77,9 +74,6 @@ include('footer.php');
                     <div id="billing_detail"></div>
                 </div>
                 <div class="modal-footer">
-                    <script>
-                        //if bill is already completed disable discount function - code 
-                    </script>
                     <div align=right>
                         <p>Give Discount: <input class="form-control form-control-sm" type="text" style="width:182px"></p>
                     </div>
