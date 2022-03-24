@@ -116,7 +116,7 @@
             {
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="https://open.spotify.com/" target="frame">
+                <a class="nav-link" href="expences.php">
                     <i class="fas fa-truck"></i>
                     <span>Other Expences</span></a>
             </li>
@@ -126,13 +126,13 @@
             {
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="https://open.spotify.com/" target="frame">
-                    <i class="fa-brands fa-paypal"></i>
+                <a class="nav-link" href="">
+                    <i class="fas fa-user"></i>
                     <span>Payroll</span></a>
             </li>
             <?php
             }
-            if($object->is_cashier_user())
+            if($object->is_cashier_user() || $object->is_master_user())
             {
             ?>
             <li class="nav-item">
