@@ -75,7 +75,7 @@ include('footer.php');
                 </div>
                 <div class="modal-footer">
                     <div align=right>
-                        <p>Give Discount: <input class="form-control form-control-sm" type="text" style="width:182px"></p>
+                        <div>Give Discount: <input class="form-control form-control-sm" type="text" style="width:182px"></div>
                     </div>
                     <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
                     <input type="hidden" name="action" id="action" value="Edit" />
