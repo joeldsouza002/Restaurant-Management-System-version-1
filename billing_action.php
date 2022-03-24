@@ -3,10 +3,10 @@
 //billing_action.php
 
 include('rms.php');
-
+//include('billing.php');
 $object = new rms();
 $count = 1;
-$discount = 10;
+$discount = $_POST["disc"];
 $gross_total = 0;
 $total_tax_amt = 0;
 $net_total = 0;
