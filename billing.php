@@ -73,19 +73,30 @@ include('footer.php');
                 <div class="modal-body">
                     <div id="billing_detail"></div>
                 </div>
+                
                 <div class="modal-footer">
+                    
+                    <form action="billing_action.php" method="post" >
                     <div align=right>
-                        <div>Give Discount: <input class="form-control form-control-sm" type="text" style="width:182px"></div>
+                       
+                        <div>Give Discount: <input class="form-control form-control-sm" name="disc" type="text" style="width:182px"></div>
                     </div>
                     <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
                     <input type="hidden" name="action" id="action" value="Edit" />
                     <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Print" />
+                    </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  
+                    
                 </div>
+               
             </div>
-        </form>
+        
     </div>
 </div>
+
+
+
 
 <script>
     $(document).ready(function() {
