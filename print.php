@@ -120,16 +120,26 @@ if(isset($_GET["order_id"]))
 
 		$total_tax_row = $object->row_count();
 
-		$rowspan = 4 + $total_tax_row;
+		$rowspan = 5 + $total_tax_row;
 
 		$tax_result = $object->statement_result();
 
 		$output .= '
 						<tr>
-							<td rowspan="'.$rowspan.'" colspan="3">
-							<b>Cashier : </b>'.$order["order_cashier"].'
-							</td>
+							<td rowspan="'.$rowspan.'" colspan="3"><b>Cashier : </b>'.$order["order_cashier"].'</td>
 							<td align="right"><b>Gross Total</b></td>
+							<td>'.$object->cur . $order["order_gross_amount"].'</td>
+						</tr>
+						<tr>
+							<td align="right"><b>Discount Percent</b></td>
+							<td>'.$object->cur . $order["order_gross_amount"].'</td>
+						</tr>
+						<tr>
+							<td align="right"><b>Discount Amount</b></td>
+							<td>'.$object->cur . $order["order_gross_amount"].'</td>
+						</tr>
+						<tr>
+							<td align="right"><b>Total After Discount</b></td>
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
 		';

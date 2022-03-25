@@ -77,12 +77,14 @@ include('footer.php');
                 <div class="modal-footer">
                     
                     <form action="billing_action.php" method="post" >
-                    <div align=right>
-                       
-                        <div>Give Discount: <input class="form-control form-control-sm" name="disc" type="text" style="width:182px"></div>
+                    <div align="right">
+                        <div>Give Discount: <input class="form-control form-control-sm" name="disc" id="disc" type="text" style="width:182px"></div>
                     </div>
                     <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
                     <input type="hidden" name="action" id="action" value="Edit" />
+                        
+                    <button type="button" name="add_user" id="add_user" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button>
+
                     <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Print" />
                     </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -3,14 +3,15 @@
 //billing_action.php
 
 include('rms.php');
-//include('billing.php');
+
 $object = new rms();
 $count = 1;
-$discount = $_POST["disc"];
+$discount = 10;
 $gross_total = 0;
 $total_tax_amt = 0;
 $net_total = 0;
 $amt_after_discount=0;
+$discount_amt = 0;
 
 
 
@@ -117,6 +118,7 @@ if(isset($_POST["action"]))
 		echo json_encode($output);
 	}
 
+
 	if($_POST["action"] == 'fetch_single')
 	{
 		$object->query = "
@@ -149,6 +151,7 @@ if(isset($_POST["action"]))
 				<td><button type="button" name="remove" class="btn btn-danger btn-sm remove_item" data-item_id="'.$row["order_item_id"].'" data-order_id="'.$row["order_id"].'"><i class="fas fa-minus-square"></i></button></td>
 			</tr>
 			';
+
 			$count++;
 			$gross_total = $gross_total + $row["product_amount"];
 
@@ -158,7 +161,6 @@ if(isset($_POST["action"]))
 			$amt_after_discount = $gross_total -$discount_amt;
 			
 		}
-
 
 		//total  amount
 		$html .= '
