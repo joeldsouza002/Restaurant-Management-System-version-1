@@ -79,8 +79,7 @@ include('footer.php');
                         <div class="col" align="right">
                         <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
                         <input type="hidden" name="action" id="action" value="Edit" />
-                        <p>Give Discount: </p>
-                        <button type="button" name="add_discount" id="add_discount" class="btn btn-success btn-circle btn-sm" value="Give Discount"><i class="fas fa-plus"></i></button>
+                        <p>Give Discount: <button type="button" name="add_discount" id="add_discount" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button></p>
                         <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Print" />
                     </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
