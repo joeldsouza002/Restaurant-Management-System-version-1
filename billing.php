@@ -75,7 +75,7 @@ include('footer.php');
                 </div>
                 
                 <div class="modal-footer">
-                    <form action="" method="POST" >
+                    <form action="billing_action" method="POST" >
                         <div class="col" align="right">
                         <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
                         <input type="hidden" name="action" id="action" value="Edit" />
@@ -110,7 +110,7 @@ include('footer.php');
         		<div class="modal-footer">
           			<input type="hidden" name="hidden_id" id="hidden_id" />
           			<input type="hidden" name="action" id="action" value="Add" />
-          			<input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Add" />
+          			<input type="submit" name="submit_discount" id="submit_discount" class="btn btn-success" value="Add" />
           			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         		</div>
       		</div>
@@ -131,7 +131,7 @@ include('footer.php');
 
     	$('#action').val('Add');
 
-    	$('#submit_button').val('Add');
+    	$('#submit_discount').val('Add');
 
     	$('#discount_Modal').modal('show');
 
@@ -152,16 +152,16 @@ include('footer.php');
 				dataType:'json',
 				beforeSend:function()
 				{
-					$('#submit_button').attr('disabled', 'disabled');
-					$('#submit_button').val('wait...');
+					$('#submit_discount').attr('disabled', 'disabled');
+					$('#submit_discount').val('wait...');
 				},
 				success:function(data)
 				{
-					$('#submit_button').attr('disabled', false);
+					$('#submit_discount').attr('disabled', false);
 					if(data.error != '')
 					{
 						$('#form_message').html(data.error);
-						$('#submit_button').val('Add');
+						$('#submit_discount').val('Add');
 					}
 					else
 					{
