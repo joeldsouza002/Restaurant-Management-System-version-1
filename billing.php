@@ -75,17 +75,13 @@ include('footer.php');
                 </div>
                 
                 <div class="modal-footer">
-                    
-                    <form action="billing_action.php" method="post" >
-                    <div align="right">
-                        <div>Give Discount: <input class="form-control form-control-sm" name="disc" id="disc" type="text" style="width:182px"></div>
-                    </div>
-                    <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
-                    <input type="hidden" name="action" id="action" value="Edit" />
-                        
-                    <button type="button" name="disc" id="disc" onclick="prompt('Enter your  discount', '%');" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button>
-
-                    <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Print" />
+                    <form action="" method="POST" >
+                        <div class="col" align="right">
+                        <input type="hidden" name="hidden_order_id" id="hidden_order_id" />
+                        <input type="hidden" name="action" id="action" value="Edit" />
+                        <p>Give Discount: </p>
+                        <button type="button" name="add_discount" id="add_discount" class="btn btn-success btn-circle btn-sm" value="Give Discount"><i class="fas fa-plus"></i></button>
+                        <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Print" />
                     </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   
@@ -97,10 +93,94 @@ include('footer.php');
     </div>
 </div>
 
+<div id="discount_Modal" class="modal fade">
+  	<div class="modal-dialog">
+    	<form method="post" id="discount_form">
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<h4 class="modal-title" id="modal_title">Add Discount</h4>
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        		</div>
+        		<div class="modal-body">
+        			<span id="form_message"></span>
+                    <div class="form-group">
+                        <label>Discount Percentage</label>
+                        <input type="text" name="discount_percentage" id="discount_percentage" class="form-control" required data-parsley-pattern="^[0-9]{1,2}\.[0-9]{2}$" data-parsley-trigger="keyup" />
+                    </div>
+        		</div>
+        		<div class="modal-footer">
+          			<input type="hidden" name="hidden_id" id="hidden_id" />
+          			<input type="hidden" name="action" id="action" value="Add" />
+          			<input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Add" />
+          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		</div>
+      		</div>
+    	</form>
+  	</div>
+</div>
 
 
 
 <script>
+    $('#add_discount').click(function(){
+		
+		$('#discount_form')[0].reset();
+
+		$('#discount_form').parsley().reset();
+
+    	$('#modal_title').text('Add Data');
+
+    	$('#action').val('Add');
+
+    	$('#submit_button').val('Add');
+
+    	$('#discount_Modal').modal('show');
+
+    	$('#form_message').html('');
+
+	});
+
+	$('#discount_form').parsley();
+
+	$('#discount_form').on('submit', function(event){
+		event.preventDefault();
+		if($('#discount_form').parsley().isValid())
+		{		
+			$.ajax({
+				url:"billing_action.php",
+				method:"POST",
+				data:$(this).serialize(),
+				dataType:'json',
+				beforeSend:function()
+				{
+					$('#submit_button').attr('disabled', 'disabled');
+					$('#submit_button').val('wait...');
+				},
+				success:function(data)
+				{
+					$('#submit_button').attr('disabled', false);
+					if(data.error != '')
+					{
+						$('#form_message').html(data.error);
+						$('#submit_button').val('Add');
+					}
+					else
+					{
+						$('#discount_Modal').modal('hide');
+						$('#message').html(data.success);
+						dataTable.ajax.reload();
+
+						setTimeout(function(){
+
+				            $('#message').html('');
+
+				        }, 5000);
+					}
+				}
+			})
+		}
+	});
+
     $(document).ready(function() {
 
         var dataTable = $('#billing_table').DataTable({

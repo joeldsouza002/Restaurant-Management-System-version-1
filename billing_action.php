@@ -6,14 +6,12 @@ include('rms.php');
 
 $object = new rms();
 $count = 1;
-$discount = 10;
+$discount = 0;
 $gross_total = 0;
 $total_tax_amt = 0;
 $net_total = 0;
 $amt_after_discount=0;
 $discount_amt = 0;
-
-
 
 if(isset($_POST["action"]))
 {
@@ -118,6 +116,49 @@ if(isset($_POST["action"]))
 		echo json_encode($output);
 	}
 
+//discount part starts
+	if($_POST["action"] == 'Add')
+	{
+		$error = '';
+
+		$success = '';
+
+		/*$object->query = "
+		SELECT * FROM tax_table 
+		WHERE tax_name = :tax_name
+		";
+
+		$object->execute($data);
+
+		if($object->row_count() > 0)
+		{
+			$error = '<div class="alert alert-danger">Tax Already Exists</div>';
+		}*/
+		
+		$data = array(
+			':order_id'	=>	$object->clean_input("16"),
+			':discount_percentage'	=>	$object->clean_input($_POST["discount_percentage"]),
+			':discount_amount'	=>	$object->clean_input($discount_amt),
+		);
+
+		$object->query = "
+		INSERT INTO discount_table 
+		(order_id, discount_percentage, discount_amount) 
+		VALUES (:order_id, :discount_percentage, :discount_amount)
+		";
+
+		$object->execute($data);
+
+		$success = '<div class="alert alert-success"> Discount Given</div>';
+
+		$output = array(
+			'error'		=>	$error,
+			'success'	=>	$success
+		);
+
+		echo json_encode($output);
+
+	}
 
 	if($_POST["action"] == 'fetch_single')
 	{
