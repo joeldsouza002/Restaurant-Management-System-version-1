@@ -185,7 +185,6 @@ if(isset($_POST["action"]))
 			$gross_total = $gross_total + $row["product_amount"];
 			$discount_amt = ($gross_total/100) * $discount;
 			$amt_after_discount = $gross_total -$discount_amt;
-			
 		}
 
 		//total amount
@@ -195,44 +194,6 @@ if(isset($_POST["action"]))
 				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
 			</tr>
 		';
-
-		/*discount amount
-		$object->query = "
-		SELECT * FROM discount_table 
-		WHERE discount_amount = '0' 
-		ORDER BY discount_id ASC
-		";
-
-		$discount_result = $object->get_result();
-
-		foreach($discount_result as $discount)
-		{
-			$discount_amt = ($gross_total * $discount["discount_percentage"])/100;
-			$html .= '
-			<tr>
-				<td colspan="4" class="text-right"><b>'.$discount["discount_id"].' ('.$discount["discount_percentage"].'%)</b></td>
-				<td colspan="2">'.$object->cur . number_format((float)$discount_amt, 2, '.', '').'</td>
-			</tr>
-			';
-			$amt_after_discount -= $discount_amt;
-
-			$discount_data = array(
-				//':discount_id'			=>	$discount["discount_id"],
-				':order_id'				=>	$_POST['order_id'],
-				':discount_percentage'	=>	$tax["discount_percentage"],
-				':discount_amount'		=>	$tax_amt
-			);
-
-			$object->query = "
-			UPDATE discount_table
-			SET discount_amount = :discount_amount,
-			WHERE order_id = '".$_POST["order_id"]."'
-			";
-
-			$object->execute($discount_data);
-		}
-		}*/
-
 
 		//tax amount
 		$object->query = "
