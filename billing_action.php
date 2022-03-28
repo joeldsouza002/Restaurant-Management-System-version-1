@@ -183,6 +183,13 @@ if(isset($_POST["action"]))
 
 			$count++;
 			$gross_total = $gross_total + $row["product_amount"];
+
+			/*$object->query = "
+			SELECT discount_percentage FROM discount_table 
+			WHERE order_id = '".$_POST['order_id']."' 
+			";
+			$discount = $object->get_result();*/
+
 			$discount_amt = ($gross_total/100) * $discount;
 			$amt_after_discount = $gross_total -$discount_amt;
 		}
