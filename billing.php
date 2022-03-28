@@ -110,6 +110,7 @@ include('footer.php');
         		<div class="modal-footer">
           			<input type="hidden" name="hidden_id" id="hidden_id" />
           			<input type="hidden" name="action" id="action" value="Add" />
+                    <input type="hidden" name="hid_order_id" id="hid_order_id" />
           			<input type="submit" name="submit_discount" id="submit_discount" class="btn btn-success" value="Add" />
           			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         		</div>
@@ -134,6 +135,8 @@ include('footer.php');
     	$('#submit_discount').val('Add');
 
     	$('#discount_Modal').modal('show');
+
+        $('#hid_order_id').val($('#hidden_order_id').val())
 
     	$('#form_message').html('');
 
@@ -229,6 +232,7 @@ include('footer.php');
             $('#hidden_order_id').val(order_id);
             $('#billingModal').modal('show');
         });
+
 
         $(document).on('change', '.product_quantity', function() {
             var quantity = $(this).val();

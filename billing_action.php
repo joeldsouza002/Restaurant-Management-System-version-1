@@ -116,27 +116,15 @@ if(isset($_POST["action"]))
 		echo json_encode($output);
 	}
 
-//discount part starts
+	//discount part starts
 	if($_POST["action"] == 'Add')
 	{
 		$error = '';
 
 		$success = '';
-
-		/*$object->query = "
-		SELECT * FROM tax_table 
-		WHERE tax_name = :tax_name
-		";
-
-		$object->execute($data);
-
-		if($object->row_count() > 0)
-		{
-			$error = '<div class="alert alert-danger">Tax Already Exists</div>';
-		}*/
 		
 		$data = array(
-			':order_id'	=>	$object->clean_input("16"),
+			':order_id'	=>	$object->clean_input($_POST["hid_order_id"]),
 			':discount_percentage'	=>	$object->clean_input($_POST["discount_percentage"]),
 			':discount_amount'	=>	$object->clean_input($discount_amt),
 		);
@@ -195,39 +183,58 @@ if(isset($_POST["action"]))
 
 			$count++;
 			$gross_total = $gross_total + $row["product_amount"];
-
-			//  discount  logic
-			$discount = $object->query = "
-			SELECT discount_percentage FROM discount_table 
-			WHERE order_id = '12'
-			";
 			$discount_amt = ($gross_total/100) * $discount;
 			$amt_after_discount = $gross_total -$discount_amt;
 			
 		}
 
-		//total  amount
+		//total amount
 		$html .= '
 			<tr>
 				<td colspan="4" class="text-right"><b>Total</b></td>
 				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
 			</tr>
 		';
-		//discount  amount
 
-		/*$html .= '
-		<tr>
-			<td colspan="4" class="text-right"><b>Discount</b></td>
-			<td colspan="2">'.$object->cur . number_format((float)$discount_amt, 2, '.', '').'</td>
-		</tr>
-	';
-		$html .= '
-		<tr>
-			<td colspan="4" class="text-right"><b>final amount</b></td>
-			<td colspan="2">'.$object->cur . number_format((float)$amt_after_discount, 2, '.', '').'</td>
-		</tr>
-	';*/
+		/*discount amount
+		$object->query = "
+		SELECT * FROM discount_table 
+		WHERE discount_amount = '0' 
+		ORDER BY discount_id ASC
+		";
 
+		$discount_result = $object->get_result();
+
+		foreach($discount_result as $discount)
+		{
+			$discount_amt = ($gross_total * $discount["discount_percentage"])/100;
+			$html .= '
+			<tr>
+				<td colspan="4" class="text-right"><b>'.$discount["discount_id"].' ('.$discount["discount_percentage"].'%)</b></td>
+				<td colspan="2">'.$object->cur . number_format((float)$discount_amt, 2, '.', '').'</td>
+			</tr>
+			';
+			$amt_after_discount -= $discount_amt;
+
+			$discount_data = array(
+				//':discount_id'			=>	$discount["discount_id"],
+				':order_id'				=>	$_POST['order_id'],
+				':discount_percentage'	=>	$tax["discount_percentage"],
+				':discount_amount'		=>	$tax_amt
+			);
+
+			$object->query = "
+			UPDATE discount_table
+			SET discount_amount = :discount_amount,
+			WHERE order_id = '".$_POST["order_id"]."'
+			";
+
+			$object->execute($discount_data);
+		}
+		}*/
+
+
+		//tax amount
 		$object->query = "
 		SELECT * FROM tax_table 
 		WHERE tax_status = 'Enable' 
