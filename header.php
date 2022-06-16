@@ -120,6 +120,8 @@
                     <i class="fas fa-truck"></i>
                     <span>Other Expences</span></a>
             </li>
+
+
             <?php
             }
             if($object->is_master_user())
@@ -130,6 +132,30 @@
                     <i class="fas fa-user"></i>
                     <span>Payroll</span></a>
             </li>
+            
+            <?php
+            }
+            if($object->is_cashier_user() || $object->is_waiter_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.swiggy.com/" target="frame">
+                    <i class="fas fa-music"></i>
+                    <span>Swiggy</span></a>
+            </li>
+
+            <?php
+            }
+            if($object->is_cashier_user() || $object->is_waiter_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.zomato.com/" target="frame">
+                    <i class="fas fa-music"></i>
+                    <span>Zomato</span></a>
+            </li>
+
+
             <?php
             }
             if($object->is_cashier_user() || $object->is_master_user())
