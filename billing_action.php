@@ -201,6 +201,18 @@ if(isset($_POST["action"]))
 				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
 			</tr>
 		';
+		$html .= '
+			<tr>
+				<td colspan="4" class="text-right"><b>Discount Percentage</b></td>
+				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
+			</tr>
+		';
+		$html .= '
+			<tr>
+				<td colspan="4" class="text-right"><b>Discount Amount</b></td>
+				<td colspan="2">'.$object->cur . number_format((float)$gross_total, 2, '.', '').'</td>
+			</tr>
+		';
 
 		//tax amount
 		$object->query = "

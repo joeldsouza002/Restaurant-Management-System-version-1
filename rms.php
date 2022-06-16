@@ -653,7 +653,7 @@ class rms
 			array('code'=> 'INR',
 			    'countryname'=> 'India',
 			    'name'=> 'Indian rupee',
-			    'symbol'=> '&#8377;'),
+			    'symbol'=> '&#x20B9;'),
 
 			array('code'=> 'IDR',
 			    'countryname'=> 'Indonesia',

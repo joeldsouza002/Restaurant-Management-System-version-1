@@ -1,7 +1,5 @@
 <?php
 
-//product.php
-
 include('rms.php');
 
 $object = new rms();
@@ -17,11 +15,11 @@ if(!$object->is_master_user())
 }
 
 include('header.php');
-                
+
 ?>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Expence Management</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Expense Management</h1>
 
                     <!-- DataTales Example -->
                     <span id="message"></span>
@@ -29,21 +27,22 @@ include('header.php');
                         <div class="card-header py-3">
                         	<div class="row">
                             	<div class="col">
-                            		<h6 class="m-0 font-weight-bold text-primary">Other Expences List</h6>
+                            		<h6 class="m-0 font-weight-bold text-primary">Expense List</h6>
                             	</div>
                             	<div class="col" align="right">
-                            		<button type="button" name="add_user" id="add_user" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button>
+                            		<button type="button" name="add_expense" id="add_expense" class="btn btn-success btn-circle btn-sm"><i class="fas fa-plus"></i></button>
                             	</div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="user_table" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="expense_table" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Expence ID</th>
-                                            <th>Expences Discription</th>
-                                            <th>Expences Total Amount</th>
+                                            <th>Expense ID</th>
+                                            <th>Expense Description</th>
+                                            <th>Expense Total Amount</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,9 +57,9 @@ include('header.php');
                 include('footer.php');
                 ?>
 
-<div id="userModal" class="modal fade">
+<div id="expenseModal" class="modal fade">
   	<div class="modal-dialog">
-    	<form method="post" id="user_form" enctype="multipart/form-data">
+    	<form method="post" id="expense_form">
       		<div class="modal-content">
         		<div class="modal-header">
           			<h4 class="modal-title" id="modal_title">Add Data</h4>
@@ -68,61 +67,13 @@ include('header.php');
         		</div>
         		<div class="modal-body">
         			<span id="form_message"></span>
+		          	<div class="form-group">
+		          		<label>Expense Discription</label>
+		          		<input type="text" name="expense_discription" id="expense_discription" class="form-control" required data-parsley-pattern="/^[a-zA-Z0-9 \s]+$/" data-parsley-trigger="keyup" />
+		          	</div>
                     <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Name <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" name="user_name" id="user_name" class="form-control" required data-parsley-pattern="/^[a-zA-Z\s]+$/" data-parsley-maxlength="150" data-parsley-trigger="keyup" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Contact No. <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" name="user_contact_no" id="user_contact_no" class="form-control" required data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12" data-parsley-trigger="keyup" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Email <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" name="user_email" id="user_email" class="form-control" required data-parsley-type="email" data-parsley-maxlength="150" data-parsley-trigger="keyup" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Password <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="password" name="user_password" id="user_password" class="form-control" required data-parsley-minlength="6" data-parsley-maxlength="16" data-parsley-trigger="keyup" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Type <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <select name="user_type" id="user_type" class="form-control" required data-parsley-trigger="change">
-                                    <option value="">Select Type</option>
-                                    <option value="Waiter">Waiter</option>
-                                    <option value="Cashier">Cashier</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">User Profile</label>
-                            <div class="col-md-8">
-                                <input type="file" name="user_image" id="user_image" />
-                                <span id="user_uploaded_image"></span>
-                            </div>
-                        </div>
+                        <label>Expense Total Amount</label>
+                        <input type="text" name="expense_total_amount" id="expense_total_amount" class="form-control">
                     </div>
         		</div>
         		<div class="modal-footer">
@@ -139,28 +90,28 @@ include('header.php');
 <script>
 $(document).ready(function(){
 
-	var dataTable = $('#user_table').DataTable({
+	var dataTable = $('#expense_table').DataTable({
 		"processing" : true,
 		"serverSide" : true,
 		"order" : [],
 		"ajax" : {
-			url:"user_action.php",
+			url:"expenses_action.php",
 			type:"POST",
 			data:{action:'fetch'}
 		},
 		"columnDefs":[
 			{
-				"targets":[0, 4, 7],
+				"targets":[3],
 				"orderable":false,
 			},
 		],
 	});
 
-	$('#add_user').click(function(){
+	$('#add_expense').click(function(){
 		
-		$('#user_form')[0].reset();
+		$('#expense_form')[0].reset();
 
-		$('#user_form').parsley().reset();
+		$('#expense_form').parsley().reset();
 
     	$('#modal_title').text('Add Data');
 
@@ -168,40 +119,23 @@ $(document).ready(function(){
 
     	$('#submit_button').val('Add');
 
-    	$('#userModal').modal('show');
+    	$('#expenseModal').modal('show');
 
     	$('#form_message').html('');
 
-        $('#user_uploaded_image').html('');
-
 	});
 
-    $('#user_image').change(function(){
-        var extension = $('#user_image').val().split('.').pop().toLowerCase();
-        if(extension != '')
-        {
-            if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)
-            {
-                alert("Invalid Image File");
-                $('#user_image').val('');
-                return false;
-            }
-        }
-    });
+	$('#expense_form').parsley();
 
-	$('#user_form').parsley();
-
-	$('#user_form').on('submit', function(event){
+	$('#expense_form').on('submit', function(event){
 		event.preventDefault();
-		if($('#user_form').parsley().isValid())
+		if($('#expense_form').parsley().isValid())
 		{		
 			$.ajax({
-				url:"user_action.php",
+				url:"expenses_action.php",
 				method:"POST",
-				data:new FormData(this),
+				data:$(this).serialize(),
 				dataType:'json',
-                contentType:false,
-                processData:false,
 				beforeSend:function()
 				{
 					$('#submit_button').attr('disabled', 'disabled');
@@ -217,7 +151,7 @@ $(document).ready(function(){
 					}
 					else
 					{
-						$('#userModal').modal('hide');
+						$('#expenseModal').modal('hide');
 						$('#message').html(data.success);
 						dataTable.ajax.reload();
 
@@ -234,33 +168,28 @@ $(document).ready(function(){
 
 	$(document).on('click', '.edit_button', function(){
 
-		var user_id = $(this).data('id');
+		var expense_id = $(this).data('id');
 
-		$('#user_form').parsley().reset();
+		$('#expense_form').parsley().reset();
 
 		$('#form_message').html('');
 
 		$.ajax({
 
-	      	url:"user_action.php",
+	      	url:"expenses_action.php",
 
 	      	method:"POST",
 
-	      	data:{user_id:user_id, action:'fetch_single'},
+	      	data:{expense_id:expense_id, action:'fetch_single'},
 
 	      	dataType:'JSON',
 
 	      	success:function(data)
 	      	{
 
-	        	$('#user_name').val(data.user_name);
-                $('#user_email').val(data.user_email);
-                $('#user_contact_no').val(data.user_contact_no);
-                $('#user_password').val(data.user_password);
+	        	$('#expense_discription').val(data.expense_discription);
 
-                $('#user_uploaded_image').html('<img src="'+data.user_profile+'" class="img-fluid img-thumbnail" width="75" height="75" /><input type="hidden" name="hidden_user_image" value="'+data.user_profile+'" />');
-
-                $('#user_type').val(data.user_type);
+                $('#expense_total_amount').val(data.expense_total_amount);
 
 	        	$('#modal_title').text('Edit Data');
 
@@ -268,9 +197,9 @@ $(document).ready(function(){
 
 	        	$('#submit_button').val('Edit');
 
-	        	$('#userModal').modal('show');
+	        	$('#expenseModal').modal('show');
 
-	        	$('#hidden_id').val(user_id);
+	        	$('#hidden_id').val(expense_id);
 
 	      	}
 
@@ -278,31 +207,78 @@ $(document).ready(function(){
 
 	});
 
+	/*$(document).on('click', '.status_button', function(){
+		var id = $(this).data('id');
+    	var status = $(this).data('status');
+		var next_status = 'Enable';
+		if(status == 'Enable')
+		{
+			next_status = 'Disable';
+		}
+		if(confirm("Are you sure you want to "+next_status+" it?"))
+    	{
+
+      		$.ajax({
+
+        		url:"expenses_action.php",
+
+        		method:"POST",
+
+        		data:{id:id, action:'change_status', status:status, next_status:next_status},
+
+        		success:function(data)
+        		{
+
+          			$('#message').html(data);
+
+          			dataTable.ajax.reload();
+
+          			setTimeout(function(){
+
+            			$('#message').html('');
+
+          			}, 5000);
+
+        		}
+
+      		})
+
+    	}
+	});*/
+
 	$(document).on('click', '.delete_button', function(){
 
     	var id = $(this).data('id');
-        var status = $(this).data('status');
-        var next_status = 'Enable';
-        if(status == 'Enable')
-        {
-            next_status = 'Disable';
-        }
-        if(confirm("Are you sure you want to "+next_status+" it?"))
-        {
-            $.ajax({
-                url:"user_action.php",
-                method:"POST",
-                data:{id:id, action:'delete', status:status, next_status:next_status},
-                success:function(data)
-                {
-                    $('#message').html(data);
-                    dataTable.ajax.reload();
-                    setTimeout(function(){
-                        $('#message').html('');
-                    }, 5000);
-                }
-            });
-        }
+
+    	if(confirm("Are you sure you want to remove it?"))
+    	{
+
+      		$.ajax({
+
+        		url:"expenses_action.php",
+
+        		method:"POST",
+
+        		data:{id:id, action:'delete'},
+
+        		success:function(data)
+        		{
+
+          			$('#message').html(data);
+
+          			dataTable.ajax.reload();
+
+          			setTimeout(function(){
+
+            			$('#message').html('');
+
+          			}, 5000);
+
+        		}
+
+      		})
+
+    	}
 
   	});
 

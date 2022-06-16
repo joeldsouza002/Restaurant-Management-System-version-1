@@ -1,3 +1,4 @@
+
 <?php
 
 //print.php
@@ -24,7 +25,7 @@ $file_name = '';
 if(isset($_GET["order_id"]))
 {
 	$output = '
-	<table width="100%" border="0" cellpadding="5" cellspacing="5" style="font-family:Arial, san-sarif">';
+	<table width="100%" border="0" cellpadding="5" cellspacing="5" style="font-family:DejaVu Sans; sans-serif;">';
 
 	$object->query = "
 		SELECT * FROM restaurant_table
@@ -130,12 +131,28 @@ if(isset($_GET["order_id"]))
 							<td align="right"><b>Gross Total</b></td>
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
+		';
+		
+		$object->query = "
+		SELECT * FROM discount_table 
+		WHERE order_id = '".$_GET["order_id"]."'
+		";
+
+		$discount_result = $object->execute();
+
+		$total_discount_row = $object->row_count();
+
+		$rowspan = 5 + $total_discount_row;
+
+		$discount_result = $object->statement_result();
+
+		$output .= '
 						<tr>
 							<td align="right"><b>Discount Percent</b></td>
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
 						<tr>
-							<td align="right"><b>Discount Amount</b></td>
+							<td align="right"><b>Discount Amount</b></td>							
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
 						<tr>
@@ -143,7 +160,7 @@ if(isset($_GET["order_id"]))
 							<td>'.$object->cur . $order["order_gross_amount"].'</td>
 						</tr>
 		';
-		
+
 		foreach($tax_result as $tax)
 		{
 			$output .= '
