@@ -132,6 +132,17 @@
                     <i class="fas fa-user"></i>
                     <span>Payroll</span></a>
             </li>
+
+            <?php
+            }
+            if($object->is_cashier_user() || $object->is_waiter_user())
+            {
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://goo.gl/maps/TuVEBTo9FghPEMPK6" target="frame">
+                    <i class="fas fa-music"></i>
+                    <span>Maps</span></a>
+            </li>
             
             <?php
             }
