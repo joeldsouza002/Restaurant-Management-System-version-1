@@ -27,6 +27,10 @@
 
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap-select/bootstrap-select.min.css"/>
 
+    <style>
+    .bg-gradient-primary1q{background-color:#121111;background-image:linear-gradient(180deg,#232325 10%,#224abe 100%);background-size:cover}
+
+    </style>
 </head>
 
 <body id="page-top">
@@ -35,7 +39,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary1q sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
