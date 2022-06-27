@@ -29,7 +29,6 @@
 
     <style>
     .bg-gradient-primary1q{background-color:#121111;background-image:linear-gradient(180deg,#232325 10%,#224abe 100%);background-size:cover}
-
     </style>
 </head>
 
